@@ -10,8 +10,14 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         ZStack {
-            Color(.green).ignoresSafeArea()
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            //Background layer
+            Color(.green)
+                .ignoresSafeArea()
+            
+            //Content Layer
+            VStack {
+                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            }
         }
     }
 }
