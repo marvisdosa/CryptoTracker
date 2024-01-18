@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class CoinImageService {
+class CoinImageService : ObservableObject{
     @Published var image: UIImage?
     private var imageSubscription: AnyCancellable?
     private var coin:CoinModel
@@ -30,13 +30,13 @@ class CoinImageService {
             print("Retrieve image from File Manager")
         } else {
             downLoadCoinIMage()
-            print("Donwloafing Imaghe now oooo")
+            print("Donwloading Imaghe now oooo")
         }
     }
     
     private func downLoadCoinIMage() {
         
-        guard let url = URL(string: coin.image) else { return }
+        guard let url = URL(string: coin.image ?? "") else { return }
         
         imageSubscription = NetworkingManager.download(url: url)
             .tryMap({ data -> UIImage? in

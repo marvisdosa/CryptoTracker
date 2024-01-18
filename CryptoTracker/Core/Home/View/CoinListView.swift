@@ -8,31 +8,32 @@
 import SwiftUI
 
 struct CoinListView: View {
-    var coin: CoinModel
-    var showPortfolioView:Bool
+    let coin: CoinModel
+    var showPortfolioView:Bool = false
     
     var body: some View {
         HStack{
             
             leftItem
             Spacer()
-            if showPortfolioView {
+            if showPortfolioView == true {
                 centerItem
+            } else {
+                EmptyView()
             }
             rightItem
         }
+        .padding(.vertical, 8)
         .font(.subheadline)
-        
-        
     }
 }
 
 struct CoinListView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            CoinListView(coin: devcoin.coin, showPortfolioView: true)
+        Group{
+            CoinListView(coin: dev.coin, showPortfolioView: true)
                 .previewLayout(.sizeThatFits)
-            CoinListView(coin: devcoin.coin, showPortfolioView: true)
+            CoinListView(coin: dev.coin, showPortfolioView: false)
                 .previewLayout(.sizeThatFits)
                 .preferredColorScheme(.dark)
         }
@@ -47,7 +48,7 @@ extension CoinListView {
                 .frame(minWidth: 30)
                 .foregroundColor(Color.theme.secondaryText)
             CoinImageView(coin: coin)
-                .frame(width: 48, height: 48)
+                .frame(width: 40, height: 40)
             Text(coin.symbol.uppercased())
                 .fontWeight(.semibold)
                 .foregroundColor(Color.theme.accent)
@@ -63,8 +64,9 @@ extension CoinListView {
     
     private var rightItem: some View {VStack(alignment:.trailing){
         VStack(alignment: .trailing){
-            Text(coin.currentPrice.asCurrencyWith6Decimals())
+            Text(coin.currentPrice?.asCurrencyWith6Decimals() ?? "")
                 .foregroundColor(Color.theme.accent)
+                .fontWeight(.bold)
             
             Text(coin.priceChangePercentage24H?.asPercentString() ?? "0%")
                 .foregroundColor((coin.priceChangePercentage24H ?? 0) >= 0 ? Color.theme.green : Color.theme.red)

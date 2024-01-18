@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension PreviewProvider {
-    static var devcoin: DeveloperPreview {
+    static var dev: DeveloperPreview {
         return DeveloperPreview.instance
     }
 }
@@ -17,9 +17,15 @@ extension PreviewProvider {
 
 
 class DeveloperPreview {
-    let vm = HomeViewModel()
     static let instance = DeveloperPreview()
     private init() {}
+    
+    let vm = HomeViewModel()
+    
+    let stat1 = StatisticsModel(title: "MarketCap", value: "$18.45B")
+    let stat2 = StatisticsModel(title: "Total Volume", value: "$18.45B", percentageChange: 18.09)
+    let stat3 = StatisticsModel(title: "portfolioValue", value: "$401k", percentageChange: -12.13)
+
     let coin = CoinModel(
             id: "bitcoin",
                symbol: "btc",
@@ -27,8 +33,7 @@ class DeveloperPreview {
                image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
                currentPrice: 61408,
                marketCap: 1141731099010,
-               marketCapRank: 1,
-               fullyDilutedValuation: 1285385611303,
+            fullyDilutedValuation: 1285385611303, marketCapRank: 1,
                totalVolume: 67190952980,
                high24H: 61712,
                low24H: 56220,
